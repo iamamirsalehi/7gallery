@@ -29,4 +29,11 @@ class CategoriesController extends Controller
 
        return back()->with('success', 'دسته بندی ایجاد شد');
     }
+
+    public function all()
+    {
+        $categories = Category::all();
+
+        return view('admin.categories.all', compact('categories'));
+    }
 }
