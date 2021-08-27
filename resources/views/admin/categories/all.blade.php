@@ -69,13 +69,7 @@
                   </div>
                   <!-- /.card -->
                   <div class="d-flex justify-content-center">
-                      <ul class="pagination mt-3">
-                          <li class="page-item"><a class="page-link" href="#">«</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۱</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۲</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۳</a></li>
-                          <li class="page-item"><a class="page-link" href="#">»</a></li>
-                      </ul>
+                     {{ $categories->links() }}
                   </div>
               </div>
           </div>
