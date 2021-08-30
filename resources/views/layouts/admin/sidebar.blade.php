@@ -22,7 +22,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="products-add.php" class="nav-link">
+                                <a href="{{ route('admin.products.create') }}" class="nav-link">
                                     <i class="fa fa-plus nav-icon"></i>
                                     <p>افزودن محصول</p>
                                 </a>
@@ -34,7 +34,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="category.php" class="nav-link">
+                                <a href="{{ route('admin.categories.all') }}" class="nav-link">
                                     <i class="nav-icon fa fa-sitemap"></i>
                                     <p>دسته بندی ها</p>
                                 </a>
