@@ -23,6 +23,7 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+        @include('errors.message')
           <div class="row">
               <div class="col-12">
                   <div class="card">
@@ -75,7 +76,12 @@
                                 <td>{{ $product->created_at }}</td>
                                 <td>
                                     <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                    <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
+                                    <form action="{{ route('admin.products.delete', $product->id) }}" method="post" style="display: inline">
+                                      @csrf
+                                      @method('delete')
+                                      <button href="" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                  
                                 </td>
                             </tr>                           
                               @endforeach

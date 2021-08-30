@@ -72,6 +72,15 @@ class ProductsController extends Controller
         }
     }
 
+    public function delete($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        $product->delete();
+
+        return back()->with('success', 'محصول حذف شد');
+    }
+
     public function downloadDemo($product_id)
     {
         $product = Product::findOrFail($product_id);
