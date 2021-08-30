@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="products.php" class="nav-link">
+                                <a href="{{ route('admin.products.all') }}" class="nav-link">
                                     <i class="fa fa-list nav-icon"></i>
                                     <p>لیست محصولات</p>
                                 </a>

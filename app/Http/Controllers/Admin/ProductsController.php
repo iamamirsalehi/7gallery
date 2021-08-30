@@ -12,6 +12,13 @@ use App\Http\Requests\Admin\Products\StoreRequest;
 
 class ProductsController extends Controller
 {
+    public function all()
+    {
+        $products = Product::paginate(10);
+        
+        return view('admin.products.all', compact('products'));
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -63,5 +70,19 @@ class ProductsController extends Controller
         }catch(\Exception $e){
             return back()->with('failed', $e->getMessage());
         }
+    }
+
+    public function downloadDemo($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        return response()->download(public_path($product->demo_url));
+    }
+
+    public function downloadSource($product_id)
+    {
+        $product = Product::findOrFail($product_id);
+
+        return response()->download(storage_path('app/local_storage/' .$product->source_url));
     }
 }
