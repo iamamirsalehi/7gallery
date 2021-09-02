@@ -67,7 +67,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="orders.php" class="nav-link">
+                        <a href="{{ route('admin.orders.all') }}" class="nav-link">
                             <i class="nav-icon fa fa-shopping-cart"></i>
                             <p class="text">سفارشات</p>
                         </a>
