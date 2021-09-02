@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->char('title');
             $table->text('description');
-            $table->char('thumbnail_url');
-            $table->char('demo_url');
-            $table->char('source_url');
+            $table->char('thumbnail_url')->nullable();
+            $table->char('demo_url')->nullable();
+            $table->char('source_url')->nullable();
             $table->unsignedInteger('price');
 
             $table->unsignedBigInteger('category_id');

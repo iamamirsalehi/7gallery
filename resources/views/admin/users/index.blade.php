@@ -11,7 +11,7 @@
             <h1 class="m-0 text-dark">
                 <a class="nav-link drawer" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 کاربران
-                <a class="btn btn-primary float-left text-white py-2 px-4" href="users-add.php">افزودن کاربر جدید</a>
+                <a class="btn btn-primary float-left text-white py-2 px-4" href="{{ route('admin.users.create') }}">افزودن کاربر جدید</a>
             </h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -50,91 +50,34 @@
                                   <th>تاریخ عضویت</th>
                                   <th>عملیات</th>
                               </tr>
+
+                              @foreach ($users as $user)
                               <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>۱۸۳</td>
-                                  <td>میلاد بسحاق</td>
-                                  <td>miladboshaghh@gmail.com</td>
-                                  <td>09168167426</td>
-                                  <td>کاربر عادی</td>
-                                  <td>۲۵ مرداد ۱۴۰۰</td>
-                                  <td>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
-                                      <a href="#" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></a>
-                                  </td>
-                              </tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->mobile }}</td>
+                                <td>{{ $user->role == 'admin' ? 'ادمین' : 'کاربر' }}</td>
+                                <td>{{ $user->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-default btn-icons"><i class="fa fa-edit"></i></a>
+                                    
+                                    <form action="{{ route('admin.users.delete', $user->id) }}" method="post" style="display: inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-default btn-icons"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                              @endforeach
+                            
                               </tbody></table>
                       </div>
                       <!-- /.card-body -->
                   </div>
                   <!-- /.card -->
                   <div class="d-flex justify-content-center">
-                      <ul class="pagination mt-3">
-                          <li class="page-item"><a class="page-link" href="#">«</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۱</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۲</a></li>
-                          <li class="page-item"><a class="page-link" href="#">۳</a></li>
-                          <li class="page-item"><a class="page-link" href="#">»</a></li>
-                      </ul>
+                     {{ $users->links() }}
                   </div>
               </div>
           </div>
