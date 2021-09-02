@@ -67,13 +67,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="orders.php" class="nav-link">
+                        <a href="{{ route('admin.orders.all') }}" class="nav-link">
                             <i class="nav-icon fa fa-shopping-cart"></i>
                             <p class="text">سفارشات</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="payments.php" class="nav-link">
+                        <a href="{{ route('admin.payments.all') }}" class="nav-link">
                             <i class="nav-icon fa fa-dollar"></i>
                             <p class="text">پرداخت ها</p>
                         </a>
