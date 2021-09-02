@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Utilities\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Products\StoreRequest;
+use App\Http\Requests\Admin\Products\UpdateRequest;
 
 class ProductsController extends Controller
 {
@@ -40,36 +41,45 @@ class ProductsController extends Controller
             'owner_id' => $admin->id,
         ]);
 
-        try{
 
-            $basePath = 'products/' . $createdProduct->id . '/';
-
-            $sourceImageFullPath = $basePath . 'source_url_' . $validatedData['source_url']->getClientOriginalName();
-            
-            $images = [
-                'thumbnail_url' => $validatedData['thumbnail_url'],
-                'demo_url' => $validatedData['demo_url'],
-            ];
-    
-            $imagesPath = ImageUploader::uploadMany($images, $basePath);
-    
-            ImageUploader::upload($validatedData['source_url'], $sourceImageFullPath, 'local_storage');
-    
-            $updatedProduct = $createdProduct->update([
-                'thumbnail_url' => $imagesPath['thumbnail_url'],
-                'demo_url' => $imagesPath['demo_url'],
-                'source_url' => $sourceImageFullPath,
-            ]);
-
-            if(!$updatedProduct){
-                throw new \Exception('تصاویر آپلود نشدند');
-            }
-
-            return back()->with('success', 'محصول ایجاد شد');
-
-        }catch(\Exception $e){
-            return back()->with('failed', $e->getMessage());
+        if(!$this->uploadImages($createdProduct, $validatedData))
+        {
+            return back()->with('failed', 'محصول ایجاد نشد');
         }
+
+        return back()->with('success', 'محصول ایجاد شد');
+
+    }
+
+    public function edit($product_id)
+    {
+        $categories = Category::all();
+
+        $product = Product::findOrFail($product_id);
+
+        return view('admin.products.edit', compact('product', 'categories'));
+    }
+
+    public function update(UpdateRequest $request, $product_id)
+    {
+        $validatedData = $request->validated();
+
+        $product = Product::findOrFail($product_id);
+
+        $updatedProduct = $product->update([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'category_id' => $validatedData['category_id'],
+            'price' => $validatedData['price'],
+        ]);
+
+
+        if(!$this->uploadImages($product, $validatedData) or !$updatedProduct)
+        {
+            return back()->with('failed', 'تصاویر بروزرسانی نشد');
+        }
+
+        return back()->with('success', 'محصول بروزرسانی شد');
     }
 
     public function delete($product_id)
@@ -92,6 +102,56 @@ class ProductsController extends Controller
     {
         $product = Product::findOrFail($product_id);
 
-        return response()->download(storage_path('app/local_storage/' .$product->source_url));
+        return response()->download(storage_path('app/local_storage/' . $product->source_url));
+    }
+
+    private function uploadImages($createdProduct, $validatedData)
+    {
+        try{
+            $basePath = 'products/' . $createdProduct->id . '/';
+
+            $sourceImageFullPath = null;
+
+            $data = [];
+
+            if(isset($validatedData['source_url']))
+            {
+                $sourceImageFullPath = $basePath . 'source_url_' . $validatedData['source_url']->getClientOriginalName();
+                
+                ImageUploader::upload($validatedData['source_url'], $sourceImageFullPath, 'local_storage');
+
+                $data += ['source_url' => $sourceImageFullPath];
+            }
+
+
+            if(isset($validatedData['thumbnail_url']))
+            {
+                $fullPath = $basePath . 'thumbnail_url' . '_' . $validatedData['thumbnail_url']->getClientOriginalName();
+
+                ImageUploader::upload($validatedData['thumbnail_url'], $fullPath, 'public_storage');
+
+                $data += ['thumbnail_url' => $fullPath];
+            }
+
+            if(isset($validatedData['demo_url']))
+            {
+                $fullPath = $basePath . 'demo_url' . '_' . $validatedData['demo_url']->getClientOriginalName();
+
+                ImageUploader::upload($validatedData['demo_url'], $fullPath, 'public_storage');
+
+                $data += ['demo_url' => $fullPath];
+            }    
+    
+            $updatedProduct = $createdProduct->update($data);
+
+            if(!$updatedProduct){
+                throw new \Exception('تصاویر آپلود نشدند');
+            }
+
+            return true;
+
+        }catch(\Exception $e){
+            return false;
+        }
     }
 }
