@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $products = null;
+
+        if($request->has('search'))
+        {
+            $products = Product::where('title', 'LIKE' ,'%'.$request->input('search') . '%')->get();
+        }else{
+            $products = Product::all();
+        }
 
         $categories = Category::all();
 
