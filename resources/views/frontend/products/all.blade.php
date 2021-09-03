@@ -105,31 +105,31 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=default" class="filter-link stext-106 trans-04">
                                     پیش فرض
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=mostPopular" class="filter-link stext-106 trans-04">
                                     محبوبیت
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="?filter=orderby&action=newest" class="filter-link stext-106 trans-04 filter-link-active">
                                     جدیدترین
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=lowToHigh" class="filter-link stext-106 trans-04">
                                     قیمت:‌ کم به زیاد
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=highToLow" class="filter-link stext-106 trans-04">
                                     قیمت:‌زیاد به کم
                                 </a>
                             </li>

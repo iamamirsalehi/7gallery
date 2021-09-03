@@ -13,12 +13,15 @@ class ProductsController extends Controller
     {
         $products = null;
 
-        if($request->has('search'))
+        if(isset($request->filter, $request->action))
+        {
+            $products = $this->findFilter($request?->filter, $request?->action) ?? Product::all();
+        }else if($request->has('search'))
         {
             $products = Product::where('title', 'LIKE' ,'%'.$request->input('search') . '%')->get();
         }else{
             $products = Product::all();
-        }
+        }        
 
         $categories = Category::all();
 
@@ -32,5 +35,26 @@ class ProductsController extends Controller
         $simillerProducts = Product::where('category_id', $product->category_id)->take(4)->get();
 
         return view('frontend.products.show', compact('product', 'simillerProducts'));
+    }
+
+    private function findFilter(string $className, string $methodName)
+    {
+        $baseNamespace = "App\Http\Controllers\Filters\\";
+
+        $className = $baseNamespace . (ucfirst($className) . 'Filter');
+
+        if(!class_exists($className))
+        {
+            return null;
+        }
+
+        $object = new $className;
+
+        if(!method_exists($object, $methodName))
+        {
+            return null;
+        }
+
+        return $object->{$methodName}();
     }
 }
