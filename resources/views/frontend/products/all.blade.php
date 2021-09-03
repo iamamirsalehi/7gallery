@@ -10,25 +10,11 @@
                     همه دسته بندی ها
                 </button>
 
-                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".women">
-                    تراکت
+                @foreach ($categories as $category)
+                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".category{{ $category->id }}">
+                    {{ $category->title }}
                 </button>
-
-                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".men">
-                    کارت ویزیت
-                </button>
-
-                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".bag">
-                    بنر
-                </button>
-
-                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".shoes">
-                    ست اداری
-                </button>
-
-                <button class="mtext-106 cl6 hov1 bor3 trans-04 m-l-32 m-tb-5" data-filter=".watches">
-                    وکتور
-                </button>
+                @endforeach
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -119,31 +105,31 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=default" class="filter-link stext-106 trans-04">
                                     پیش فرض
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=mostPopular" class="filter-link stext-106 trans-04">
                                     محبوبیت
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="?filter=orderby&action=newest" class="filter-link stext-106 trans-04 filter-link-active">
                                     جدیدترین
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=lowToHigh" class="filter-link stext-106 trans-04">
                                     قیمت:‌ کم به زیاد
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="?filter=orderby&action=highToLow" class="filter-link stext-106 trans-04">
                                     قیمت:‌زیاد به کم
                                 </a>
                             </li>
@@ -155,11 +141,12 @@
         </div>
 
         <div class="row isotope-grid">
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+            @foreach ($products as $product)
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item category{{ $product->category_id }}">
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="/images/product-01.jpg" alt="IMG-PRODUCT">
+                        <img src="/{{ $product->demo_url }}" alt="IMG-PRODUCT">
 
                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                             مشاهده سریع
@@ -168,492 +155,19 @@
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                کارت ویزیت فروشگاه
+                            <a href="{{ route('home.product.show', $product->id) }}" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                {{ $product->title }}
                             </a>
 
                             <span class="stext-105 cl3">
-                                ۱۳ هزار تومان
+                                {{ $product->price }} هزار تومان
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
 
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-02.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                تراکت مشاور املاک
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳۴ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-03.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                وکتور کیف
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-04.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                لوگو فروشگاه کامپیوتر
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۹ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-01.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                کارت ویزیت فروشگاه
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۱۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-02.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                تراکت مشاور املاک
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳۴ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-03.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                وکتور کیف
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-04.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                لوگو فروشگاه کامپیوتر
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۹ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-01.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                کارت ویزیت فروشگاه
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۱۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-02.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                تراکت مشاور املاک
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳۴ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-03.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                وکتور کیف
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-04.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                لوگو فروشگاه کامپیوتر
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۹ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-01.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                کارت ویزیت فروشگاه
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۱۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-02.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                تراکت مشاور املاک
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳۴ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-03.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                وکتور کیف
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-04.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                لوگو فروشگاه کامپیوتر
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۹ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-01.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                کارت ویزیت فروشگاه
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۱۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-02.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                تراکت مشاور املاک
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳۴ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-03.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                وکتور کیف
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۳ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                <!-- Block2 -->
-                <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <img src="/images/product-04.jpg" alt="IMG-PRODUCT">
-
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            مشاهده سریع
-                        </a>
-                    </div>
-
-                    <div class="block2-txt flex-w flex-t p-t-14">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="single.php" class="mtext-106 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                لوگو فروشگاه کامپیوتر
-                            </a>
-
-                            <span class="stext-105 cl3">
-                                ۹ هزار تومان
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Load more -->
@@ -665,8 +179,7 @@
     </div>
 </div>
 
-
-<!-- Modal1 -->
+    <!-- Modal1 -->
 <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
     <div class="overlay-modal1 js-hide-modal1"></div>
 
@@ -750,5 +263,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection
