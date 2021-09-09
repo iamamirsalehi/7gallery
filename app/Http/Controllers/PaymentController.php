@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Payment;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Services\Payment\PaymentService;
 use App\Http\Requests\Payment\PayRequest;
-use App\Models\Payment;
-use App\Models\Product;
 use App\Services\Payment\Requests\IDPayRequest;
 
 class PaymentController extends Controller
@@ -30,6 +30,10 @@ class PaymentController extends Controller
 
         try{
             $orderItems = json_decode(Cookie::get('basket'), true);
+
+            if(count($orderItems) <= 0){
+                throw new \InvalidArgumentException('سبد خرید شما خالی است');
+            }
 
             $products = Product::findMany(array_keys($orderItems));
 
@@ -66,11 +70,11 @@ class PaymentController extends Controller
                 'order_id' => $createdOrder->id,
             ]);
 
-
             $idPayRequest = new IDPayRequest([
                 'amount' => $productsPrice,
                 'user' => $user,
                 'orderId' => $refCode,
+                'apiKey' => config('services.gateways.id_pay.api_key'),
             ]);
             
             $paymentService = new PaymentService(PaymentService::IDPAY, $idPayRequest);

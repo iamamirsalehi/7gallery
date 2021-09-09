@@ -33,7 +33,13 @@ class IDPayProvider extends AbstractProviderInterface implements PayableInterfac
           $result = curl_exec($ch);
           curl_close($ch);
           
-          var_dump($result);
+          $result = json_decode($result, true);
+
+          if(isset($result['error_code'])){
+              throw new \InvalidArgumentException($result['error_message']);
+          }
+
+          return redirect()->away($result['link']);
     }
     
     public function verify()
