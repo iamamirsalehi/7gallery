@@ -11,7 +11,7 @@ class IDPayProvider extends AbstractProviderInterface implements PayableInterfac
     
     public function pay()
     {
-
+        
     }
     
     public function verify()
